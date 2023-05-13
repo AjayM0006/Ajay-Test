@@ -1638,9 +1638,12 @@ a.product__text {
 
 #dropdown{
   width: 70%;
-  height: 4.5rem;
+  height: 4.3rem;
   padding: 1rem;
   margin-top: 1rem;
   font-size: 14px;
 }
 
+.variant-validation{
+  color: red;
+}
