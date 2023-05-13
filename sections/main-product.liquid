@@ -306,9 +306,19 @@
                 block: block,
                 share_link: share_url
               %}
-
+     
+            {% comment %} Color Watches with Size Dropdown {% endcomment %}
+               
             {%- when 'variant_picker' -%}
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+              
+              <select id = "dropdown" onchange = "selectOption()">
+                <option>Unselected</option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+             </select>
+             
             {%- when 'buy_buttons' -%}
               {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
             {%- when 'rating' -%}
@@ -488,6 +498,8 @@
     <script src="{{ 'product-model.js' | asset_url }}" defer></script>
   {%- endif -%}
 
+  {{ 'main-product.js' | asset_url | script_tag }}
+  
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       function isIE() {
