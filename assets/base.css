@@ -2379,6 +2379,10 @@ product-info .loading-overlay:not(.hidden) ~ *,
   line-height: 0;
 }
 
+.header__heading .header__heading-link .h2{
+  color: green;
+}
+
 .header > .header__heading-link {
   line-height: 0;
 }
