@@ -66,6 +66,42 @@ if (!customElements.get('product-form')) {
             this.cart.renderContents(response);
           }
         })
+        
+        // Js to add the Freebee product 
+        .then(cartData => {
+          console.log(cartData);
+          fetch('/cart.js')
+             .then(response => response.json())
+             .then(cartData => {
+                let cartVariantIds = cartData.items.map(item => item.id).join(', ');
+                if (cartVariantIds.includes(45189475074328) && (!cartVariantIds.includes(45188860346648))) {
+                fetch('/cart/add.js', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        items: [{
+                            id: 45188860346648,
+                            quantity: 1
+                        }]
+                      })
+                  })
+                  .then(response => {
+                      if (response.ok) {
+                      } else {
+                        throw new Error('Error adding product to cart');
+                      }
+                  })
+                  .then(cartData => {
+                      location.reload();
+                  })
+                  .catch(error => {
+                      alert(error.message);
+                  });
+                }
+             })
+        })
         .catch((e) => {
           console.error(e);
         })

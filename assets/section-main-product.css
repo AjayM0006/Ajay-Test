@@ -1599,3 +1599,51 @@ a.product__text {
     border: none;
   }
 }
+
+/* Color Swatch CSS  */
+
+.product-form__input input[type=radio]+label.color-swatch{
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}
+
+.product-form__input input[type=radio]:checked+label.color-swatch{
+  box-shadow: 0 0 0 2px #000;
+  transition: box-shadow .2s ease;
+}
+
+.product-form__input input[type=radio]+label.color-swatch::before{
+  content: "";
+  border: 3px solid #fff;
+  border-radius: 100%;
+  z-index: 1;
+  position: absolute;
+  top: -1;
+  left: -1;
+  right: -1;
+  bottom: -1;
+  
+}
+
+/* Color Swatch CSS Ends */
+
+.disable-button{
+  pointer-events: none;
+}
+
+.hide-size{
+  display:none;
+}
+
+#dropdown{
+  width: 70%;
+  height: 4.3rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 14px;
+}
+
+.variant-validation{
+  color: red;
+}

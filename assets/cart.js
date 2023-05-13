@@ -141,7 +141,44 @@ class CartItems extends HTMLElement {
           trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'))
         }
         publish(PUB_SUB_EVENTS.cartUpdate, {source: 'cart-items'});
-      }).catch(() => {
+      })
+       
+      // Js to remove the Freebee product 
+      .then(cartData => {
+        console.log(cartData);
+        fetch('/cart.js')
+           .then(response => response.json())
+           .then(cartData => {
+              let cartVariantIds = cartData.items.map(item => item.id).join(', ');     
+              if ((!cartVariantIds.includes(45189475074328)) && (cartVariantIds.includes(45188860346648))) {
+     
+                 fetch('/cart/change.js', {
+                       method: 'POST',
+                       headers: {
+                          'Content-Type': 'application/json'
+                       },
+                       body: JSON.stringify({
+                          id: '45188860346648',
+                          quantity: 0
+                       })
+                    })
+                    .then(response => {
+                       // Handle response from the server
+                       console.log('Product removed from cart:', response);
+                    })
+                    .then(cartData => {
+                       location.reload();
+                    })
+                    .catch(error => {
+                       // Handle any errors that occur during the request
+                       console.error('Error removing product from cart:', error);
+                    });
+              }
+           })
+     })
+     
+      
+      .catch(() => {
         this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
         errors.textContent = window.cartStrings.error;

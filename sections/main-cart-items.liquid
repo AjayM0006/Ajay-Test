@@ -217,7 +217,7 @@
                     </div>
                   </td>
 
-                  <td class="cart-item__quantity">
+                  <td class="cart-item__quantity  {% if item.product.id == 8302784119064 %} disable-button {% endif %} ">
                     <div class="cart-item__quantity-wrapper">
                       <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                         {{ 'products.product.quantity.label' | t }}
